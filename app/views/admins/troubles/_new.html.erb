@@ -1,0 +1,7 @@
+    <%= form_with model: trouble, url:admins_troubles_path, local:true do |f| %>
+
+    <p>お悩みタグ</p>
+    <%= f.text_field :name %>
+
+    <%= f.submit "新規投稿" %>
+    <% end %>

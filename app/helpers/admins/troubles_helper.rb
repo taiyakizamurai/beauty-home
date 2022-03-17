@@ -1,0 +1,2 @@
+module Admins::TroublesHelper
+end

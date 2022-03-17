@@ -1,0 +1,113 @@
+ <h2>注文履歴詳細詳細</h2>
+<div class="container">
+  <div class="row">
+     <div class="col-lg-8">
+  <div class="row">
+     <div class="col-lg-4">
+       <p>購入者</p>
+     </div>
+        <div class="col-lg-8">
+          <%= link_to @order.name, admins_customer_path %>
+        </div>
+  </div>
+    <div class="row">
+     <div class="col-lg-4">
+       <p>注文日</p>
+     </div>
+        <div class="col-lg-8">
+          <%= @order.created_at %>
+        </div>
+  </div>
+    <div class="row">
+     <div class="col-lg-4">
+       <p>配送先</p>
+     </div>
+        <div class="col-lg-8">
+          〒<%= @order.postal_code %><%= @order.address %>
+        </div>
+  </div>
+    <div class="row">
+     <div class="col-lg-4">
+       <p>支払方法</p>
+     </div>
+        <div class="col-lg-8">
+        <% if @order.payment_method == 0 %>
+          　クレジットカード
+           <% else %>
+           銀行振込
+           <% end %>
+        </div>
+  </div>
+    <div class="row">
+     <div class="col-lg-4">
+       <p>注文ステータス</p>
+     </div>
+        <div class="col-lg-8">
+          <%= form_with model:@order, url:admins_order_path, local:true do |f| %><%= f.select :status, {'入金待ち':0, '入金確認': 1, '発送準備中': 2, '発送済み': 3}, { include_blank: '選択してください'} %>
+          <%= f.submit '更新' %>
+          <% end %>
+        </div>
+  </div>
+          </div>
+          <div class="col-lg-4">
+            <table>
+            <tbody>
+         <tr>
+           <td>商品合計</td><td><%= ((@order.total_payment)-(@order.shipping_cost)) %>円</td>
+          </tr>
+       <tr>
+         <td>配送料</td>
+         <td><%= @order.shipping_cost %>円</td>
+       </tr>
+       <tr>
+         <td>ご請求額</td>
+         <td><%= @order.total_payment %>円</td>
+       </tr>
+             </tbody>
+  </table>
+      </div>
+  </div>
+
+
+
+
+
+
+
+      <div class="row">
+     <div class="col-lg-8">
+    <table class="table table-hover table-inverse">
+    <thead>
+
+      <tr>
+        <th><p>商品名</p></th>
+        <th><p>単価（税込）</p></th>
+        <th><p>数量</p></th>
+        <th><p>小計</p></th>
+
+
+      </tr>
+    </thead>
+
+
+
+    <tbody>
+      <% @order_items.each do |item| %>
+
+
+         <tr>
+           <td><%= item.item.name %></td>
+           <td><%= (item.price*1.08).to_i %></td>
+           <td><%= item.amount %></td>
+           <td><%= ((item.price*1.08)*(item.amount)).to_i %></td>
+         </tr>
+       <% end %>
+    </tbody>
+  </table>
+
+     </div>
+        <div class="col-lg-4">
+
+        </div>
+  </div>
+</div>
