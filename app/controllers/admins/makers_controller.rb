@@ -35,7 +35,7 @@ end
       render 'edit'
     end
     end
-
+private
     def maker_params
     params.require(:maker).permit(:name, :introduction, :image, :is_active)
     end

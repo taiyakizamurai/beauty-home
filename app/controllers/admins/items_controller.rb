@@ -34,7 +34,7 @@ end
       render 'edit'
     end
     end
-
+private
     def item_params
     params.require(:item).permit(:name, :introduction, :image, :trouble_id, :maker_id, :is_active, :price)
     end

@@ -28,6 +28,7 @@ class Admins::TroublesController < ApplicationController
       render 'edit'
     end
     end
+    private
     def trouble_params
      params.require(:trouble).permit(:name)
     end
