@@ -6,7 +6,8 @@ end
 
 def create
     @maker = Maker.new(maker_params)
-   if @maker.save!
+    
+   if @maker.save
     redirect_to admins_maker_path(@maker.id)
    else
      render 'new'
